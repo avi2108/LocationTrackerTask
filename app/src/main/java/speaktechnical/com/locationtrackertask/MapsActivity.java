@@ -67,10 +67,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private FloatingActionButton floatingActionButton;
     private TextView tvForLocationTrackInfo;
-    LocationRequest mLocationRequest;
+    private LocationRequest mLocationRequest;
     private boolean mRequestingLocationUpdates = false;
-    SharedPreferences mPrefs;
-    Handler handler;
+    private SharedPreferences mPrefs;
+    private Handler handler;
     private RequestQueue mRequestQueue;
 
     @Override
@@ -189,6 +189,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             return;
         }
+            //get the current location on connected
         mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mCurrentLocation != null) {
             // Add a marker in current location and move the camera
@@ -229,7 +230,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         tvForLocationTrackInfo.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
         tvForLocationTrackInfo.setText("Location Track is being recorded");
         animationRotateX = ObjectAnimator.ofFloat(tvForLocationTrackInfo, "rotationX", 0.0f, 360f);
-        animationRotateX.setDuration(2000);
+        animationRotateX.setDuration(3000);
         animationRotateX.setRepeatCount(ObjectAnimator.INFINITE);
         animationRotateX.setInterpolator(new AccelerateDecelerateInterpolator());
         animationRotateX.start();
@@ -321,8 +322,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    LocationManager lm;
-    AlertDialog.Builder dialogForSettings;
+   private LocationManager lm;
+   private AlertDialog.Builder dialogForSettings;
 
     /**
      * This function will check for location service status in device and throws a dialog to enable the location service if not
